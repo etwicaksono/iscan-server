@@ -122,15 +122,27 @@ function upload_single_file($setting = null)
     ];
     $ci->load->library('upload', $config,  $setting['name']);
 
-    if ($setting['name'] == 'foto_toko') {
-        if ($ci->foto_toko->do_upload($setting['name'])) {
-            if ($setting['old_image'] != 'default.png' &&  $setting['old_image'] != '') remover_per_item($setting['path'],  $setting['old_image']);
-            if ($ci->foto_toko->data("file_size") > $setting["resize"] && $setting["resize"] != false) strict_resizer($ci->foto_toko->data(), $setting["resize"]);
-            return $ci->foto_toko->data('file_name');
-        } else {
-            mk_alert2('Upload foto_toko gagal.', $ci->foto_toko->display_errors(), 'error');
-            return ($setting['old_image'] == '' ? "default.png" :  $setting['old_image']);
-        }
+    switch ($setting['name']) {
+        case "foto_toko":
+            if ($ci->foto_toko->do_upload($setting['name'])) {
+                if ($setting['old_image'] != 'default.png' &&  $setting['old_image'] != '') remover_per_item($setting['path'],  $setting['old_image']);
+                if ($ci->foto_toko->data("file_size") > $setting["resize"] && $setting["resize"] != false) strict_resizer($ci->foto_toko->data(), $setting["resize"]);
+                return $ci->foto_toko->data('file_name');
+            } else {
+                mk_alert2('Upload foto_toko gagal.', $ci->foto_toko->display_errors(), 'error');
+                return ($setting['old_image'] == '' ? "default.png" :  $setting['old_image']);
+            }
+            break;
+
+        case "foto_produk":
+            if ($ci->foto_produk->do_upload($setting['name'])) {
+                if ($setting['old_image'] != 'default.png' &&  $setting['old_image'] != '') remover_per_item($setting['path'],  $setting['old_image']);
+                if ($ci->foto_produk->data("file_size") > $setting["resize"] && $setting["resize"] != false) strict_resizer($ci->foto_produk->data(), $setting["resize"]);
+                return $ci->foto_produk->data('file_name');
+            } else {
+                mk_alert2('Upload foto_produk gagal.', $ci->foto_produk->display_errors(), 'error');
+                return ($setting['old_image'] == '' ? "default.png" :  $setting['old_image']);
+            }
     }
 }
 

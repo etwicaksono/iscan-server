@@ -56,5 +56,6 @@ $route['blocked'] = "Publics/blocked";
 $route['tester'] = "Publics/tester";
 
 $route['input-toko'] = "Admin/input_toko";
+$route['input-produk'] = "Admin/input_produk";
 
 require_once APPPATH . 'cache/routes.php';
