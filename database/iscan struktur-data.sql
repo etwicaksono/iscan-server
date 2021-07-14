@@ -11,7 +11,7 @@
  Target Server Version : 100316
  File Encoding         : 65001
 
- Date: 05/07/2021 05:07:01
+ Date: 13/07/2021 20:38:25
 */
 
 SET NAMES utf8mb4;
@@ -85,5 +85,34 @@ INSERT INTO `produk` VALUES (47, 12, '6575675684', 'Produk 1', 10000, '{\"deskri
 INSERT INTO `produk` VALUES (48, 12, '6575675686', 'Produk 3', 200000, '{\"deskripsi\":\"Lorem ipsum dolor sit amet consectetur adipisicing elit. Itaque deleniti, repellendus voluptatibus at, alias modi quam nihil corporis similique placeat ex rem ad non inventore perspiciatis sed veritatis eum veniam. Lorem ipsum dolor sit amet consectetur, adipisicing elit. Porro commodi ut, incidunt eligendi quasi explicabo nulla reiciendis in magnam quam, perspiciatis ipsum veritatis sunt quia adipisci aliquid dolores corporis iure? Lorem, ipsum dolor sit amet consectetur adipisicing elit. Repellendus officia exercitationem nisi, iure, suscipit ab id perspiciatis ipsum veritatis doloremque molestiae nihil assumenda harum? Repudiandae harum dicta cupiditate facere laboriosam?\",\"date_input\":\"2021-07-05 04:57:09\",\"date_last_scan\":\"\",\"scan_count\":0,\"foto\":\"default.png\"}');
 INSERT INTO `produk` VALUES (49, 12, '6575675687', 'Produk 4', 300000, '{\"deskripsi\":\"Lorem ipsum dolor sit amet consectetur adipisicing elit. Itaque deleniti, repellendus voluptatibus at, alias modi quam nihil corporis similique placeat ex rem ad non inventore perspiciatis sed veritatis eum veniam. Lorem ipsum dolor sit amet consectetur, adipisicing elit. Porro commodi ut, incidunt eligendi quasi explicabo nulla reiciendis in magnam quam, perspiciatis ipsum veritatis sunt quia adipisci aliquid dolores corporis iure? Lorem, ipsum dolor sit amet consectetur adipisicing elit. Repellendus officia exercitationem nisi, iure, suscipit ab id perspiciatis ipsum veritatis doloremque molestiae nihil assumenda harum? Repudiandae harum dicta cupiditate facere laboriosam?\",\"date_input\":\"2021-07-05 04:57:19\",\"date_last_scan\":\"\",\"scan_count\":0,\"foto\":\"default.png\"}');
 INSERT INTO `produk` VALUES (50, 12, '6575675688', 'Produk 5', 30000, '{\"deskripsi\":\"Lorem ipsum dolor sit amet consectetur adipisicing elit. Itaque deleniti, repellendus voluptatibus at, alias modi quam nihil corporis similique placeat ex rem ad non inventore perspiciatis sed veritatis eum veniam. Lorem ipsum dolor sit amet consectetur, adipisicing elit. Porro commodi ut, incidunt eligendi quasi explicabo nulla reiciendis in magnam quam, perspiciatis ipsum veritatis sunt quia adipisci aliquid dolores corporis iure? Lorem, ipsum dolor sit amet consectetur adipisicing elit. Repellendus officia exercitationem nisi, iure, suscipit ab id perspiciatis ipsum veritatis doloremque molestiae nihil assumenda harum? Repudiandae harum dicta cupiditate facere laboriosam?\",\"date_input\":\"2021-07-05 04:57:33\",\"date_last_scan\":\"\",\"scan_count\":0,\"foto\":\"default.png\"}');
+
+-- ----------------------------
+-- Table structure for toko
+-- ----------------------------
+DROP TABLE IF EXISTS `toko`;
+CREATE TABLE `toko`  (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `kode` varchar(128) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
+  `nama` varchar(128) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
+  `alamat` varchar(256) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
+  `ekstra` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL,
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 13 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of toko
+-- ----------------------------
+INSERT INTO `toko` VALUES (1, '6456567734534', 'Toko Janumart', 'Jl. Uji Coba 1', '{\"date_input\":\"2021-07-04 19:52:46\",\"date_last_scan\":\"\",\"scan_count\":0,\"foto\":\"toko_tokojanumart_60e1af1e6002d.png\"}');
+INSERT INTO `toko` VALUES (2, '6456567734535', 'Toko Febrimart', 'Jl. Uji Coba 2', '{\"date_input\":\"2021-07-04 19:53:16\",\"date_last_scan\":\"\",\"scan_count\":0,\"foto\":\"toko_tokofebumart_60e1af3cbe589.png\"}');
+INSERT INTO `toko` VALUES (3, '6456567734536', 'Toko Maretamart', 'Jl. Uji Coba 3', '{\"date_input\":\"2021-07-04 19:53:29\",\"date_last_scan\":\"\",\"scan_count\":0,\"foto\":\"toko_tokomarumart_60e1af49080ee.png\"}');
+INSERT INTO `toko` VALUES (4, '6456567734537', 'Toko Aprimart', 'Jl. Uji Coba 4', '{\"date_input\":\"2021-07-04 19:54:09\",\"date_last_scan\":\"\",\"scan_count\":0,\"foto\":\"toko_tokoaprimart_60e1af719c341.png\"}');
+INSERT INTO `toko` VALUES (5, '6456567734538', 'Toko Meimart', 'Jl. Uji Coba 5', '{\"date_input\":\"2021-07-04 19:54:26\",\"date_last_scan\":\"\",\"scan_count\":0,\"foto\":\"default.png\"}');
+INSERT INTO `toko` VALUES (6, '6456567734539', 'Toko Junimart', 'Jl. Uji Coba 6', '{\"date_input\":\"2021-07-04 19:54:43\",\"date_last_scan\":\"\",\"scan_count\":0,\"foto\":\"default.png\"}');
+INSERT INTO `toko` VALUES (7, '6456567734540', 'Toko Julymart', 'Jl. Uji Coba 7', '{\"date_input\":\"2021-07-04 19:54:57\",\"date_last_scan\":\"\",\"scan_count\":0,\"foto\":\"default.png\"}');
+INSERT INTO `toko` VALUES (8, '6456567734541', 'Toko Agusmart', 'Jl. Uji Coba 8', '{\"date_input\":\"2021-07-04 19:55:16\",\"date_last_scan\":\"\",\"scan_count\":0,\"foto\":\"default.png\"}');
+INSERT INTO `toko` VALUES (9, '6456567734542', 'Toko Septimart', 'Jl. Uji Coba 9', '{\"date_input\":\"2021-07-04 19:55:34\",\"date_last_scan\":\"\",\"scan_count\":0,\"foto\":\"default.png\"}');
+INSERT INTO `toko` VALUES (10, '6456567734543', 'Toko Oktamart', 'Jl. Uji Coba 10', '{\"date_input\":\"2021-07-04 19:55:48\",\"date_last_scan\":\"\",\"scan_count\":0,\"foto\":\"default.png\"}');
+INSERT INTO `toko` VALUES (11, '6456567734544', 'Toko Novimart', 'Jl. Uji Coba 11', '{\"date_input\":\"2021-07-04 19:56:06\",\"date_last_scan\":\"\",\"scan_count\":0,\"foto\":\"default.png\"}');
+INSERT INTO `toko` VALUES (12, '6456567734545', 'Toko Desimart', 'Jl. Uji Coba 12', '{\"date_input\":\"2021-07-04 19:56:40\",\"date_last_scan\":\"\",\"scan_count\":0,\"foto\":\"default.png\"}');
 
 SET FOREIGN_KEY_CHECKS = 1;

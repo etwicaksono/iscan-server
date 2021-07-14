@@ -11,7 +11,7 @@
  Target Server Version : 100316
  File Encoding         : 65001
 
- Date: 04/07/2021 20:16:10
+ Date: 13/07/2021 20:38:25
 */
 
 SET NAMES utf8mb4;
@@ -31,8 +31,7 @@ CREATE TABLE `produk`  (
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `FK_PRODUK_TO_TOKO`(`id_toko`) USING BTREE,
   CONSTRAINT `FK_PRODUK_TO_TOKO` FOREIGN KEY (`id_toko`) REFERENCES `toko` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
-
+) ENGINE = InnoDB AUTO_INCREMENT = 51 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
 -- ----------------------------
 -- Table structure for toko
 -- ----------------------------
