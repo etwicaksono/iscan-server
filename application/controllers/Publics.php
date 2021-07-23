@@ -15,30 +15,11 @@ class Publics extends CI_Controller
 
 	public function tester()
 	{
-		// echo password_hash("9des2020", PASSWORD_DEFAULT);
+		// $arr = [1, 2, 3, 4];
 
-		// For demonstration purposes, get pararameters that are passed in through $_GET or set to the default value
-		$filepath = (isset($_GET["filepath"]) ? $_GET["filepath"] : "");
-		$text = (isset($_GET["text"]) ? $_GET["text"] : "0");
-		$size = (isset($_GET["size"]) ? $_GET["size"] : "20");
-		$orientation = (isset($_GET["orientation"]) ? $_GET["orientation"] : "horizontal");
-		$code_type = (isset($_GET["codetype"]) ? $_GET["codetype"] : "code128");
-		$print = (isset($_GET["print"]) && $_GET["print"] == 'true' ? true : false);
-		$sizefactor = (isset($_GET["sizefactor"]) ? $_GET["sizefactor"] : "1");
+		// array_push($arr, 4, 5, 6);
+		// dd(array_unique($arr));
 
-		// This function call can be copied into your project and can be made from anywhere in your code
-		$config = [
-			"filepath" => $filepath,
-			"text" => $text,
-			"size" => $size,
-			"orientation" => $orientation,
-			"code_type" => $code_type,
-			"print" => $print,
-			"SizeFactor" => $sizefactor,
-			"downloadFile" => true,
-			"fileName" => "tester"
-		];
-
-		barcode($config);
+		echo http_build_query(["list_toko" => json_encode([7, 8, 9, 10, 11, 12, 1, 2, 3, 4, 5, 6])]);
 	}
 }

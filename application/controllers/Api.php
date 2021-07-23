@@ -33,22 +33,45 @@ class Api extends CI_Controller
 					}
 					break;
 				case "some":
+					$toko = json_decode($input["list_toko"]);
+					if (!empty($toko)) {
+						$query = "
+									SELECT
+									`id`,
+									`kode`,
+									`nama`,
+									`alamat`,
+									CONCAT('" . base_url() . "','assets/img/toko/',JSON_UNQUOTE(JSON_EXTRACT(ekstra,'$.foto'))) foto,
+									`ekstra`
+									FROM
+									" . $table . " WHERE id IN (" . implode(",", $toko) . ")
+									ORDER BY FIELD(id," . implode(",", $toko) . ")";
+						$result = $this->db->query($query)->result_array();
+						if ($result) {
+							$response = result_all_data($table, $result);
+						} else {
+							$response = data_not_found($table);
+						}
+					} else {
+						$response = result_all_data($table, []);
+					}
 					break;
 				case "single":
-					$result = $this->db->query("
+					$query = "
 					SELECT
 					`id`,
 					`kode`,
 					`nama`,
 					`alamat`,
-					JSON_UNQUOTE(JSON_EXTRACT(ekstra,'$.foto')) foto,
+					CONCAT('" . base_url() . "','assets/img/toko/',JSON_UNQUOTE(JSON_EXTRACT(ekstra,'$.foto'))) foto,
 					`ekstra`
 					FROM
-					" . $table . " WHERE kode = " . $input["barcode"])
-						->row_array();
+					" . $table . " WHERE kode = " . $input["barcode"];
+					$result = $this->db->query($query)->row_array();
 
 					if ($result) {
-						$response = result_all_data($table, $result);
+						$result["kode"] = implode(" ", str_split($result["kode"], 4));
+						$response = data_found($table, $result);
 					} else {
 						$response = data_not_found($table);
 					}
@@ -93,14 +116,23 @@ class Api extends CI_Controller
 					`nama`,
 					`harga`,
 					JSON_UNQUOTE(JSON_EXTRACT(ekstra,'$.deskripsi')) deskripsi,
-					JSON_UNQUOTE(JSON_EXTRACT(ekstra,'$.foto')) foto,
+					JSON_EXTRACT(ekstra,'$.foto') foto,
 					`ekstra`
 					FROM
 					" . $table . " WHERE kode = " . $input["barcode"] . " AND id_toko = " . $input["id_toko"])
 						->row_array();
 
 					if ($result) {
-						$response = result_all_data($table, $result);
+						$foto = json_decode($result["foto"]);
+						$temp = [];
+						foreach ($foto as $f) {
+							$temp[] = base_url("assets/img/produk/" . $f);
+						}
+
+						$result["foto"] = $temp;
+						$result["kode"] = implode(" ", str_split($result["kode"], 4));
+
+						$response = data_found($table, $result);
 					} else {
 						$response = data_not_found($table);
 					}
