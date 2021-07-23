@@ -45,7 +45,7 @@ class Api extends CI_Controller
 									`ekstra`
 									FROM
 									" . $table . " WHERE id IN (" . implode(",", $toko) . ")
-									ORDER BY FIELD(id," . implode(",", $toko) . ")";
+									ORDER BY FIELD(id," . implode(",", $toko) . ") DESC";
 						$result = $this->db->query($query)->result_array();
 						if ($result) {
 							$response = result_all_data($table, $result);
