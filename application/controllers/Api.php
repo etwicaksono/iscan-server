@@ -64,6 +64,7 @@ class Api extends CI_Controller
 					`nama`,
 					`alamat`,
 					CONCAT('" . base_url() . "','assets/img/toko/',JSON_UNQUOTE(JSON_EXTRACT(ekstra,'$.foto'))) foto,
+					JSON_EXTRACT(ekstra, '$.scan_count') scan_count,
 					`ekstra`
 					FROM
 					" . $table . " WHERE kode = " . $input["barcode"];
@@ -71,6 +72,7 @@ class Api extends CI_Controller
 
 					if ($result) {
 						$result["kode"] = implode(" ", str_split($result["kode"], 4));
+						$this->update_scan_count($table, $result["id"], $result["scan_count"]);
 						$response = data_found($table, $result);
 					} else {
 						$response = data_not_found($table);
@@ -117,6 +119,7 @@ class Api extends CI_Controller
 					`harga`,
 					JSON_UNQUOTE(JSON_EXTRACT(ekstra,'$.deskripsi')) deskripsi,
 					JSON_EXTRACT(ekstra,'$.foto') foto,
+					JSON_EXTRACT(ekstra,'$.scan_count') scan_count,
 					`ekstra`
 					FROM
 					" . $table . " WHERE kode = " . $input["barcode"] . " AND id_toko = " . $input["id_toko"])
@@ -131,6 +134,7 @@ class Api extends CI_Controller
 
 						$result["foto"] = $temp;
 						$result["kode"] = implode(" ", str_split($result["kode"], 4));
+						$this->update_scan_count($table, $result["id"], $result["scan_count"]);
 
 						$response = data_found($table, $result);
 					} else {
@@ -159,6 +163,12 @@ class Api extends CI_Controller
 		}
 
 		echo json_encode($response);
+	}
+
+	private function update_scan_count($table, $id, $scan_count)
+	{
+		$query = "UPDATE " . $table . " SET ekstra = JSON_MERGE_PATCH(ekstra, '{\"scan_count\":" . ($scan_count + 1) . ",\"date_last_scan\":\"" . date("Y-m-d H:i:s") . "\"}') WHERE id = " . $id;
+		$this->db->query($query);
 	}
 
 	public function tester()

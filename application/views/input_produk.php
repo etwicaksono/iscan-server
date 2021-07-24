@@ -56,17 +56,17 @@
                 </div>
                 <div class="form-group">
                     <label for="kode">Kode Produk</label>
-                    <input type="number" class="form-control" id="kode" name="kode" required>
+                    <input type="number" class="form-control" id="kode" name="kode" required autocomplete="off">
                     <small class="error-text error-kode text-danger"></small>
                 </div>
                 <div class="form-group">
                     <label for="nama">Nama Produk</label>
-                    <input type="text" class="form-control" id="nama" name="nama" required>
+                    <input type="text" class="form-control" id="nama" name="nama" required autocomplete="off">
                     <small class="error-text error-nama text-danger"></small>
                 </div>
                 <div class="form-group">
                     <label for="harga">Harga Produk</label>
-                    <input type="number" class="form-control" id="harga" name="harga" required>
+                    <input type="number" class="form-control" id="harga" name="harga" required autocomplete="off">
                     <small class="error-text error-harga text-danger"></small>
                 </div>
                 <div class="form-group">
@@ -77,7 +77,7 @@
                 </div>
                 <div class="form-group">
                     <label for="foto_produk">Foto produk</label>
-                    <input type="file" class="form-control" id="foto_produk" name="foto_produk">
+                    <input type="file" class="form-control" id="foto_produk" name="foto_produk[]" multiple>
                     <small class="error-text error-foto_produk text-danger"></small>
                 </div>
 
@@ -132,8 +132,8 @@
                     });
                 },
                 success: function(res) {
-                    console.log('success');
-                    console.log(res);
+                    // console.log('success');
+                    // console.log(res);
                     // return false;
                     $("[name='" + res.name + "']").val(res.hash);
                     $(".error-text").html("");

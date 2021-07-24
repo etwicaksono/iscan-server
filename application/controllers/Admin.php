@@ -150,6 +150,8 @@ class Admin extends CI_Controller
 		];
 
 		// jd($this->input->post());
+		// jd($_FILES["foto_produk"]);
+		// jd($_FILES);
 
 		$this->form_validation->set_rules($config);
 		if ($this->form_validation->run() == false) {
@@ -161,7 +163,6 @@ class Admin extends CI_Controller
 				'deskripsi' => form_error('deskripsi'),
 				'harga' => form_error('harga'),
 			];
-			// jd("cek");
 		} else {
 			extract($this->input->post());
 
@@ -178,15 +179,22 @@ class Admin extends CI_Controller
 				"scan_count" => 0
 			];
 
-			if ($_FILES["foto_produk"]["error"] == 0) {
-				$extra["foto"] = upload_single_file([
-					'name' => 'foto_produk',
-					'filename' => $id_toko . '_produk_' . seo_title($nama),
-					'path' => 'assets/img/produk/',
-					'old_image' => '',
-					'allowed_types' => 'jpg|jpeg|png|JPG|PNG|JPEG',
-					'max_size' => '0',
-					'resize' => 500, //false or int value
+			if ($_FILES["foto_produk"]["error"][0] == 0) {
+				// $extra["foto"] = upload_single_file([
+				// 	'name' => 'foto_produk',
+				// 	'filename' => $id_toko . '_produk_' . seo_title($nama),
+				// 	'path' => 'assets/img/produk/',
+				// 	'old_image' => '',
+				// 	'allowed_types' => 'jpg|jpeg|png|JPG|PNG|JPEG',
+				// 	'max_size' => '0',
+				// 	'resize' => 500, //false or int value
+				// ]);
+				$extra["foto"] = multiUploadFoto([
+					"file" => $_FILES["foto_produk"],
+					"param" => "foto_produk",
+					"base_name" => $id_toko . '_produk_' . seo_title($nama),
+					"relative_path" => "assets/img/produk/",
+					"resize" => 500
 				]);
 			} else {
 				$extra["foto"] = "default.png";

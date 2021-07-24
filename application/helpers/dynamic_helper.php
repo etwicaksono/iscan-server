@@ -347,12 +347,19 @@ function fileValidator($config = null)
 }
 
 
-function multiUploadFoto($file, $param, $base_name, $relative_path, $oldImage)
+function multiUploadFoto($config = [
+    "file" => "",
+    "param" => "",
+    "base_name" => "",
+    "relative_path" => "",
+    "resize" => false
+])
 {
     $ci = get_instance();
-    $config['allowed_types'] = 'jpg|jpeg|png|JPG|PNG|JPEG|pdf|PDF';
-    $config['max_size'] = '20000';
-    // $config['overwrite'] = true;
+    extract($config);
+    $setting['allowed_types'] = 'jpg|jpeg|png|JPG|PNG|JPEG|pdf|PDF';
+    $setting['max_size'] = '20000';
+    // $setting['overwrite'] = true;
     $result = [];
 
     foreach ($file['name'] as $key => $image) {
@@ -363,9 +370,9 @@ function multiUploadFoto($file, $param, $base_name, $relative_path, $oldImage)
         $_FILES[$param]['size'] = $file['size'][$key];
 
         $path = FCPATH . $relative_path;
-        $config['file_name'] = seo_title($base_name) . "-" . $key;
-        $config['upload_path'] = $path;
-        $ci->upload->initialize($config);
+        $setting['file_name'] = seo_title($base_name) . "-" . $key;
+        $setting['upload_path'] = $path;
+        $ci->upload->initialize($setting);
 
         if ($ci->upload->do_upload($param)) {
             list($width, $height) = getimagesize($_FILES[$param]['tmp_name']);
@@ -373,14 +380,12 @@ function multiUploadFoto($file, $param, $base_name, $relative_path, $oldImage)
                 'size' => ['width' => $width, 'height' => $height],
                 'file_name' => $ci->upload->data('file_name')
             ];
-            array_push($result, $temp);
-            // resizer($ci->upload->data());
+            if ($ci->upload->data("file_size") > $resize && $resize != false) strict_resizer($ci->upload->data(), $resize);
+
+            array_push($result, $temp["file_name"]);
         }
     }
 
-    if ($oldImage != 'default.png' && $oldImage != '') {
-        removerByArray($param, $oldImage);
-    }
     return $result;
 }
 
